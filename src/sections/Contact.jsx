@@ -26,7 +26,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Bogor, Indonesia",
+    value: "Bogor , Indonesia",
     href: "#",
   },
 ];
