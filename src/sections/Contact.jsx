@@ -17,12 +17,7 @@ const contactInfo = [
     value: "ryansyah3r@gmail.com",
     href: "mailto:ryansyah3r@gmail.com",
   },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "0882-1234-5678",
-    href: "tel:+15551234567",
-  },
+  
   {
     icon: MapPin,
     label: "Location",

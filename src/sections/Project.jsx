@@ -3,13 +3,31 @@ import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
 const project = [
   {
-    title: "Fintech dashboard",
+    title: "E-Commerce Website Laravel",
     description:
-      "A sleek and modern dashboard for managing financial data and transactions.",
-    image: "/projects/project1.png",
-    tags: ["React", "Tailwind CSS", "Node.js"],
-    github: "#",
+      "A website for an e-commerce business that sells products online.",
+    image: "/projects/ecomerce.png",
+    tags: ["Laravel","Livewire", "Filament", "Tailwind CSS", "MySQL", "Payment Gateway"],
+    github: "https://github.com/Rikivcstar/E-Commerce-Store",
     link: "#",
+  },
+  {
+    title: "System Manegement Ekstrakulikuler",
+    description:
+      "A system for managing the activities of the extracurricular department of a school.",
+    image: "/projects/ekskul.png",
+    tags: ["Php", "Codeigniter", "Tailwind CSS", "MySQL"],
+    github: "https://github.com/Rikivcstar/ekstraulikuler-sistem",
+    link: "https://siskul.mtsn1lebak.sch.id/",
+  },
+  {
+    title: "Booking Hotel",
+    description:
+      "A website for a hotel booking system that allows users to book hotels online.",
+    image: "/projects/hotel.png",
+    tags: ["React", "Tailwind CSS", "Node.js", "Payment Gateway"],
+    github: "https://github.com/Rikivcstar/Cabin-hotel",
+    link: "https://booking-hotel.vercel.app",
   },
   {
     title: "E-commerce platform",
