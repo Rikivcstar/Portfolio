@@ -1,5 +1,7 @@
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
+import { AnimateOnScroll } from "@/components/MotionWrappers";
+import { motion, AnimatePresence } from "framer-motion";
 
 const testimonials = [
   {
@@ -36,18 +38,45 @@ const testimonials = [
   },
 ];
 
+const slideVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 200 : -200,
+    opacity: 0,
+    filter: "blur(8px)",
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+  },
+  exit: (direction) => ({
+    x: direction < 0 ? 200 : -200,
+    opacity: 0,
+    filter: "blur(8px)",
+  }),
+};
+
 export const Testimonials = () => {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   const next = () => {
+    setDirection(1);
     setActiveIdx((prev) => (prev + 1) % testimonials.length);
   };
 
   const previous = () => {
+    setDirection(-1);
     setActiveIdx(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
   };
+
+  const goTo = (idx) => {
+    setDirection(idx > activeIdx ? 1 : -1);
+    setActiveIdx(idx);
+  };
+
   return (
     <section id="testimonials" className="py-32 relative overflow-hidden">
       <div
@@ -55,98 +84,111 @@ export const Testimonials = () => {
        w-[800px] h-[800px] bg-primary/5
         rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
       />
-      <div
-        className="container mx-auto 
-      px-6 relative z-10"
-      >
+      <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div
-          className="text-center max-w-3xl 
-        mx-auto mb-16"
-        >
-          <span
-            className="text-secondary-foreground 
-          text-sm font-medium tracking-wider 
-          uppercase animate-fade-in"
-          >
-            What People Say
-          </span>
-          <h2
-            className="text-4xl md:text-5xl 
-          font-bold mt-4 mb-6 animate-fade-in 
-          animation-delay-100 text-secondary-foreground"
-          >
-            Kind words from{" "}
-            <span
-              className="font-serif italic 
-            font-normal text-white"
-            >
-              amazing people.
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <AnimateOnScroll>
+            <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
+              What People Say
             </span>
-          </h2>
+          </AnimateOnScroll>
+          <AnimateOnScroll delay={0.1}>
+            <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground">
+              Kind words from{" "}
+              <span className="font-serif italic font-normal text-white">
+                amazing people.
+              </span>
+            </h2>
+          </AnimateOnScroll>
         </div>
 
         {/* Testimonial Carousel */}
-        <div className="max-w-4xl mx-auto">
+        <AnimateOnScroll delay={0.2} className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Main Testimonial */}
-            <div className="glass p-8 rounded-3xl md:p-12 glow-border animate-fade-in animation-delay-200">
-              <div className="absolute -top-4 left-8 w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+            <div className="glass p-8 rounded-3xl md:p-12 glow-border overflow-hidden relative min-h-[280px]">
+              <motion.div
+                className="absolute -top-4 left-8 w-12 h-12 rounded-full bg-primary flex items-center justify-center"
+                whileHover={{ rotate: 15, scale: 1.1 }}
+              >
                 <Quote className="w-6 h-6 text-primary-foreground" />
-              </div>
+              </motion.div>
 
-              <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-8 pt-4">
-                "{testimonials[activeIdx].quote}"
-              </blockquote>
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={activeIdx}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.25, 0.4, 0.25, 1],
+                  }}
+                >
+                  <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-8 pt-4">
+                    "{testimonials[activeIdx].quote}"
+                  </blockquote>
 
-              <div className="flex items-center gap-4">
-                <img
-                  src={testimonials[activeIdx].avatar}
-                  alt={testimonials[activeIdx].author}
-                  className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/20"
-                />
-                <div>
-                  <div className="font-semibold">
-                    {testimonials[activeIdx].author}
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={testimonials[activeIdx].avatar}
+                      alt={testimonials[activeIdx].author}
+                      className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/20"
+                    />
+                    <div>
+                      <div className="font-semibold">
+                        {testimonials[activeIdx].author}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {testimonials[activeIdx].role}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {testimonials[activeIdx].role}
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Testimonials Navigation */}
             <div className="flex items-center justify-center gap-4 mt-8">
-              <button
-                className="p-3 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all"
+              <motion.button
+                className="p-3 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all cursor-pointer"
                 onClick={previous}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <ChevronLeft />
-              </button>
+              </motion.button>
 
               <div className="flex gap-2">
                 {testimonials.map((_, idx) => (
-                  <button
-                    onClick={() => setActiveIdx(idx)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  <motion.button
+                    key={idx}
+                    onClick={() => goTo(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                       idx === activeIdx
-                        ? "w-8 bg-primary"
+                        ? "bg-primary"
                         : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
                     }`}
+                    animate={{ width: idx === activeIdx ? 32 : 8 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.2 }}
                   />
                 ))}
               </div>
 
-              <button
+              <motion.button
                 onClick={next}
-                className="p-3 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all"
+                className="p-3 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <ChevronRight />
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );

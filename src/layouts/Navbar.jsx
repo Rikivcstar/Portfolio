@@ -5,8 +5,8 @@ import { use, useEffectEvent, useState } from "react";
 
 const navLinks = [
   { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#portfolio", label: "Portfolio" },
+  { href: "#projects", label: "Projects" },
+  { href: "#pricing", label: "Pricing" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -23,9 +23,8 @@ export const Navbar = () => {
   }, []);
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
-        isScrolled ? "glass-strong py-3" : "bg-transparent py-5"
-      } z-50`}
+      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${isScrolled ? "glass-strong py-3" : "bg-transparent py-5"
+        } z-50`}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
         <a
