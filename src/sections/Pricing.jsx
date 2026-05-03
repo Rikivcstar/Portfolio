@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Check, Star, ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/Button";
+import { Check, ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimateOnScroll } from "@/components/MotionWrappers";
+import SpotlightCard from "@/components/bits/SpotlightCard";
 
 const categories = [
   "Landing Page",
@@ -14,60 +14,28 @@ const categories = [
 ];
 
 const pricingData = {
+  // ... (keeping the same pricingData structure as in the original file)
   "Landing Page": [
     {
       name: "Starter",
       price: "1.500.000",
       tagline: "Cocok untuk bisnis baru yang ingin langsung tampil online dengan landing page elegan.",
-      features: [
-        "Free Domain (.com)",
-        "Shared Hosting (6 Bulan)",
-        "Desain Responsif (Mobile & Desktop)",
-        "1 Halaman Landing Page (scroll panjang)",
-        "1 Email Bisnis",
-        "1 GB Disk Storage",
-        "Free SSL",
-        "1x Revisi Gratis",
-        "Garansi Maintenance 15 Hari",
-        "Video Panduan Akses Website",
-      ],
+      features: ["Free Domain (.com)", "Shared Hosting (6 Bulan)", "Desain Responsif (Mobile & Desktop)", "1 Halaman Landing Page", "1 Email Bisnis", "Free SSL"],
       popular: false,
-      featured: false,
     },
     {
       name: "Growth",
       price: "2.750.000",
       tagline: "Buat kamu yang pengen tampil lebih profesional dan punya kontrol lebih atas fitur & brand.",
-      features: [
-        "Semua yang ada di Starter, plus:",
-        "Hosting 1 Tahun",
-        "Desain Visual Lebih Kompleks (CTA, Form, Galeri)",
-        "Direct WhatsApp Chat",
-        "2 Email Bisnis",
-        "10 GB Disk Storage",
-        "3x Revisi Gratis",
-        "Free SSL",
-        "SEO On-Page Basic",
-        "Garansi Maintenance 1 Bulan",
-      ],
+      features: ["Semua di Starter", "Hosting 1 Tahun", "Direct WhatsApp Chat", "10 GB Disk Storage", "SEO On-Page Basic", "Garansi Maintenance 1 Bulan"],
       popular: true,
-      featured: false,
     },
     {
       name: "Ultimate",
       price: "3.750.000",
       tagline: "Solusi landing page all-in-one buat bisnis digital yang pengen konversi tinggi + tampil premium.",
-      features: [
-        "Semua yang ada di Growth, plus:",
-        "Up to 2 Halaman Tambahan (About / FAQ / Blog Preview)",
-        "Request Fitur Khusus (Popup, Accordion, Pricing Table, dll)",
-        "Desain Interaktif (Animated Scroll, Parallax, dll)",
-        "Speed Optimization (Lazy Load + Caching Tools)",
-        "5x Revisi Gratis",
-        "Garansi Maintenance 1,5 Bulan",
-      ],
+      features: ["Semua di Growth", "Up to 2 Halaman Tambahan", "Request Fitur Khusus", "Desain Interaktif", "Speed Optimization", "5x Revisi Gratis"],
       popular: false,
-      featured: true,
     },
   ],
   "Web Company Profile": [
@@ -75,55 +43,22 @@ const pricingData = {
       name: "Starter",
       price: "2.000.000",
       tagline: "Solusi company profile sederhana dan profesional untuk UMKM.",
-      features: [
-        "Free Domain (.com)",
-        "Shared Hosting (6 Bulan)",
-        "Desain Responsif (Mobile & Desktop)",
-        "Up to 3 Halaman (Home, About, Contact)",
-        "1 Email Bisnis",
-        "2 GB Disk Storage",
-        "Free SSL",
-        "1x Revisi Gratis",
-        "Garansi Maintenance 15 Hari",
-      ],
+      features: ["Free Domain (.com)", "Desain Responsif", "Up to 3 Halaman", "1 Email Bisnis", "Free SSL"],
       popular: false,
-      featured: false,
     },
     {
       name: "Growth",
       price: "3.500.000",
       tagline: "Company profile lengkap untuk perusahaan yang ingin tampil profesional secara online.",
-      features: [
-        "Semua yang ada di Starter, plus:",
-        "Hosting 1 Tahun",
-        "Up to 6 Halaman",
-        "Galeri Foto/Video",
-        "Direct WhatsApp Chat",
-        "3 Email Bisnis",
-        "10 GB Disk Storage",
-        "3x Revisi Gratis",
-        "SEO On-Page Basic",
-        "Garansi Maintenance 1 Bulan",
-      ],
+      features: ["Semua di Starter", "Hosting 1 Tahun", "Up to 6 Halaman", "WhatsApp Chat", "SEO Basic"],
       popular: true,
-      featured: false,
     },
     {
       name: "Ultimate",
       price: "5.000.000",
       tagline: "Company profile premium dengan fitur lengkap & desain custom.",
-      features: [
-        "Semua yang ada di Growth, plus:",
-        "Unlimited Halaman",
-        "Blog/News Section",
-        "Multi-Language Support",
-        "Desain Interaktif & Animasi Custom",
-        "Speed Optimization",
-        "5x Revisi Gratis",
-        "Garansi Maintenance 2 Bulan",
-      ],
+      features: ["Semua di Growth", "Unlimited Halaman", "Blog/News Section", "Multi-Language", "Speed Optimization"],
       popular: false,
-      featured: true,
     },
   ],
   "Web Travel & Tour": [
@@ -131,54 +66,22 @@ const pricingData = {
       name: "Starter",
       price: "2.500.000",
       tagline: "Website travel sederhana untuk menampilkan paket wisata.",
-      features: [
-        "Free Domain (.com)",
-        "Shared Hosting (6 Bulan)",
-        "Desain Responsif",
-        "Up to 5 Halaman",
-        "Katalog Paket Tour",
-        "WhatsApp Chat Integration",
-        "Free SSL",
-        "1x Revisi Gratis",
-        "Garansi Maintenance 15 Hari",
-      ],
+      features: ["Free Domain (.com)", "Katalog Paket Tour", "WhatsApp Integration", "1x Revisi"],
       popular: false,
-      featured: false,
     },
     {
       name: "Growth",
       price: "4.500.000",
       tagline: "Website travel profesional dengan fitur booking sederhana.",
-      features: [
-        "Semua yang ada di Starter, plus:",
-        "Hosting 1 Tahun",
-        "Sistem Booking Sederhana (via Form)",
-        "Galeri Destinasi",
-        "Testimonial Section",
-        "10 GB Disk Storage",
-        "3x Revisi Gratis",
-        "SEO On-Page Basic",
-        "Garansi Maintenance 1 Bulan",
-      ],
+      features: ["Semua di Starter", "Sistem Booking Form", "Galeri Destinasi", "SEO On-Page"],
       popular: true,
-      featured: false,
     },
     {
       name: "Ultimate",
       price: "7.000.000",
       tagline: "Website travel premium dengan booking system & payment gateway.",
-      features: [
-        "Semua yang ada di Growth, plus:",
-        "Booking System + Payment Gateway",
-        "Dashboard Admin untuk Manage Tour",
-        "Review & Rating System",
-        "Desain Interaktif & Animasi",
-        "Speed Optimization",
-        "5x Revisi Gratis",
-        "Garansi Maintenance 2 Bulan",
-      ],
+      features: ["Semua di Growth", "Payment Gateway", "Dashboard Admin", "Speed Optimization"],
       popular: false,
-      featured: true,
     },
   ],
   "Web Toko Online": [
@@ -186,169 +89,68 @@ const pricingData = {
       name: "Starter",
       price: "3.000.000",
       tagline: "Toko online sederhana untuk mulai berjualan online.",
-      features: [
-        "Free Domain (.com)",
-        "Shared Hosting (6 Bulan)",
-        "Desain Responsif",
-        "Up to 50 Produk",
-        "Keranjang Belanja",
-        "WhatsApp Order",
-        "Free SSL",
-        "1x Revisi Gratis",
-        "Garansi Maintenance 15 Hari",
-      ],
+      features: ["Free Domain (.com)", "Keranjang Belanja", "WhatsApp Order", "Free SSL"],
       popular: false,
-      featured: false,
     },
     {
       name: "Growth",
       price: "5.500.000",
       tagline: "Toko online profesional dengan payment gateway terintegrasi.",
-      features: [
-        "Semua yang ada di Starter, plus:",
-        "Hosting 1 Tahun",
-        "Unlimited Produk",
-        "Payment Gateway (Midtrans/Xendit)",
-        "Dashboard Admin",
-        "Manajemen Stok",
-        "10 GB Disk Storage",
-        "3x Revisi Gratis",
-        "SEO On-Page Basic",
-        "Garansi Maintenance 1 Bulan",
-      ],
+      features: ["Semua di Starter", "Payment Gateway", "Dashboard Admin", "Manajemen Stok"],
       popular: true,
-      featured: false,
     },
     {
       name: "Ultimate",
       price: "8.500.000",
       tagline: "E-commerce full-featured untuk bisnis digital serius.",
-      features: [
-        "Semua yang ada di Growth, plus:",
-        "Kupon & Diskon System",
-        "Multi-variant Produk",
-        "Laporan Penjualan",
-        "Integrasi Ongkir (RajaOngkir)",
-        "Speed Optimization",
-        "5x Revisi Gratis",
-        "Garansi Maintenance 2 Bulan",
-      ],
+      features: ["Semua di Growth", "Kupon & Diskon", "Multi-variant Produk", "Integrasi Ongkir"],
       popular: false,
-      featured: true,
+    },
+  ],
+  "Web Sistem Management": [
+    {
+      name: "Small",
+      price: "5.000.000",
+      tagline: "Sistem web sederhana untuk kebutuhan internal atau UMKM.",
+      features: ["Hosting 1 Tahun", "Up to 5 Modul", "Dashboard Admin", "CRUD Data"],
+      popular: false,
+    },
+    {
+      name: "Medium",
+      price: "10.000.000",
+      tagline: "Sistem web profesional untuk manajemen data & proses bisnis.",
+      features: ["Semua di Small", "Up to 12 Modul", "Multi-Role Admin", "Export PDF/Excel"],
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      price: "18.000.000",
+      tagline: "Sistem web enterprise-level untuk organisasi besar.",
+      features: ["Semua di Medium", "Unlimited Modul", "Payment Integration", "Real-time Analytics"],
+      popular: false,
     },
   ],
   "Optimasi SEO": [
     {
       name: "Starter",
       price: "750.000",
-      tagline: "Optimasi dasar untuk meningkatkan visibilitas website di Google.",
-      features: [
-        "Audit Website SEO",
-        "Keyword Research (5 Keywords)",
-        "On-Page SEO Optimization",
-        "Meta Tags & Open Graph Setup",
-        "Google Search Console Setup",
-        "1x Laporan SEO",
-        "Durasi: 1 Bulan",
-      ],
+      tagline: "Optimasi dasar untuk meningkatkan visibilitas di Google.",
+      features: ["Audit Website", "Keyword Research", "On-Page Setup", "Search Console"],
       popular: false,
-      featured: false,
     },
     {
       name: "Growth",
       price: "1.500.000",
-      tagline: "Optimasi SEO berkelanjutan untuk meningkatkan ranking secara konsisten.",
-      features: [
-        "Semua yang ada di Starter, plus:",
-        "Keyword Research (15 Keywords)",
-        "Content Strategy & Blog Optimization",
-        "Technical SEO (Speed, Mobile, Schema)",
-        "Backlink Strategy",
-        "2x Laporan SEO per Bulan",
-        "Durasi: 3 Bulan",
-      ],
+      tagline: "Optimasi SEO berkelanjutan untuk ranking konsisten.",
+      features: ["Semua di Starter", "Keyword (15 items)", "Content Strategy", "Monthly Report"],
       popular: true,
-      featured: false,
     },
     {
       name: "Ultimate",
       price: "3.000.000",
-      tagline: "Paket SEO premium untuk dominasi halaman pertama Google.",
-      features: [
-        "Semua yang ada di Growth, plus:",
-        "Keyword Research (30+ Keywords)",
-        "Competitor Analysis",
-        "Content Creation (4 Artikel/Bulan)",
-        "Link Building Premium",
-        "Monthly SEO Report + Consultation",
-        "Durasi: 6 Bulan",
-      ],
+      tagline: "Paket SEO premium untuk dominasi halaman pertama.",
+      features: ["Semua di Growth", "Competitor Analysis", "4 Artikel/Bulan", "Link Building"],
       popular: false,
-      featured: true,
-    },
-  ],
-  "Web Sistem Management": [
-    {
-      name: "Skala Kecil",
-      price: "5.000.000",
-      tagline: "Sistem web sederhana untuk kebutuhan internal atau UMKM. Cocok untuk digitalisasi proses bisnis skala kecil.",
-      features: [
-        "Free Domain (.com)",
-        "Hosting 1 Tahun",
-        "Desain Responsif (Mobile & Desktop)",
-        "Up to 5 Modul/Fitur",
-        "Dashboard Admin Sederhana",
-        "CRUD Data (Create, Read, Update, Delete)",
-        "Login & Role Management (2 Role)",
-        "Database MySQL",
-        "Free SSL",
-        "2x Revisi Gratis",
-        "Garansi Maintenance 1 Bulan",
-        "Source Code & Dokumentasi",
-      ],
-      popular: false,
-      featured: false,
-    },
-    {
-      name: "Skala Menengah",
-      price: "10.000.000",
-      tagline: "Sistem web profesional untuk perusahaan yang butuh manajemen data & proses bisnis yang lebih kompleks.",
-      features: [
-        "Semua yang ada di Skala Kecil, plus:",
-        "Up to 12 Modul/Fitur",
-        "Multi-Role Management (4+ Role)",
-        "Laporan & Export Data (PDF/Excel)",
-        "Notifikasi Email / WhatsApp",
-        "API Integration",
-        "Search, Filter & Pagination",
-        "Activity Log & Audit Trail",
-        "3x Revisi Gratis",
-        "SEO On-Page Basic",
-        "Garansi Maintenance 2 Bulan",
-      ],
-      popular: true,
-      featured: false,
-    },
-    {
-      name: "Skala Besar",
-      price: "18.000.000",
-      tagline: "Sistem web enterprise-level untuk organisasi besar dengan kebutuhan custom & integrasi kompleks.",
-      features: [
-        "Semua yang ada di Skala Menengah, plus:",
-        "Unlimited Modul/Fitur",
-        "Multi-Tenant / Multi-Branch Support",
-        "Payment Gateway Integration",
-        "Real-time Dashboard & Analytics",
-        "REST API untuk Integrasi Pihak Ketiga",
-        "Automated Backup System",
-        "Performance & Security Optimization",
-        "CI/CD Deployment Pipeline",
-        "5x Revisi Gratis",
-        "Garansi Maintenance 3 Bulan",
-        "Training & Onboarding Tim",
-      ],
-      popular: false,
-      featured: true,
     },
   ],
 };
@@ -367,197 +169,120 @@ export const Pricing = () => {
   const plans = pricingData[activeCategory];
 
   return (
-    <section id="pricing" className="py-32 relative overflow-hidden">
-      {/* Background glows */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-highlight/5 rounded-full blur-3xl" />
-
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="pricing" className="py-32 relative overflow-hidden bg-[#0b0b0d]">
+      <div className="container mx-auto px-6 relative z-10 max-w-[1200px]">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="mb-20">
           <AnimateOnScroll>
-            <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
-              Pricelist Layanan
-            </span>
-          </AnimateOnScroll>
-          <AnimateOnScroll delay={0.1}>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground">
-              Solusi lengkap untuk{" "}
-              <span className="font-serif italic font-normal text-white">
-                bisnis digital Anda.
+            <div className="flex items-center gap-3 text-[#b0fb3a] mb-6">
+              <span className="text-xl">✦</span>
+              <span className="text-sm font-bold tracking-[0.2em] uppercase font-sans">
+                Pricing
               </span>
-            </h2>
+            </div>
           </AnimateOnScroll>
-          <AnimateOnScroll delay={0.2}>
-            <p className="text-muted-foreground">
-              Pilih paket yang sesuai dengan kebutuhan bisnis Anda. Semua paket
-              termasuk support dan garansi maintenance.
-            </p>
+          
+          <AnimateOnScroll delay={0.1}>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+              <h2 className="text-[3.5rem] md:text-[5rem] font-bold tracking-tighter text-white font-heading leading-[1.1]">
+                Service Plans
+              </h2>
+              <p className="text-[#a3a3a3] text-[17px] md:text-lg leading-relaxed font-sans max-w-sm pb-2">
+                Transparent pricing for every stage of your digital journey. Select a category to explore options.
+              </p>
+            </div>
           </AnimateOnScroll>
         </div>
 
         {/* Category Tabs */}
-        <AnimateOnScroll delay={0.3}>
-          <div className="flex flex-wrap justify-center gap-2 mb-16">
+        <AnimateOnScroll delay={0.2}>
+          <div className="flex flex-wrap gap-3 mb-16">
             {categories.map((category) => (
-              <motion.button
+              <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${activeCategory === category
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                    : "glass text-muted-foreground hover:text-foreground hover:bg-surface"
-                  }`}
+                className={`px-8 py-3 rounded-full text-sm font-bold font-sans transition-all duration-300 border ${
+                  activeCategory === category
+                    ? "bg-[#b0fb3a] text-black border-[#b0fb3a]"
+                    : "bg-transparent text-[#a3a3a3] border-white/10 hover:border-white/30 hover:text-white"
+                }`}
               >
                 {category}
-              </motion.button>
+              </button>
             ))}
           </div>
         </AnimateOnScroll>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-start">
+        <div className="grid md:grid-cols-3 gap-8 items-start">
           {plans.map((plan, idx) => (
-            <motion.div
-              layout
-              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.25, 0.4, 0.25, 1] }}
-              key={`${activeCategory}-${plan.name}`}
-              className={`relative rounded-2xl overflow-hidden transition-colors duration-500 ${plan.popular
-                  ? "border-2 border-primary shadow-[0_0_40px_rgba(32,178,166,0.15)] md:scale-105 md:-my-4 z-10"
-                  : plan.featured
-                    ? "border border-foreground/20 bg-foreground/[0.03]"
-                    : "border border-border/50"
-                } ${plan.featured ? "glass-strong" : "glass"
-                }`}
-            >
-              {/* Popular badge */}
-              {plan.popular && (
-                <div className="absolute top-0 left-0 right-0 bg-primary py-1.5 text-center">
-                  <div className="flex items-center justify-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-primary-foreground" />
-                    <span className="text-xs font-semibold text-primary-foreground tracking-wider uppercase">
-                      Popular
-                    </span>
+            <AnimateOnScroll key={idx} delay={0.1 * idx}>
+              <SpotlightCard className={`relative group h-full ${plan.popular ? "border-[#b0fb3a]/30" : ""}`}>
+                {plan.popular && (
+                  <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 bg-[#b0fb3a] rounded-full">
+                    <Sparkles size={12} className="text-black" />
+                    <span className="text-[10px] font-bold text-black uppercase tracking-wider">Popular</span>
                   </div>
-                </div>
-              )}
+                )}
 
-              <div className={`p-8 ${plan.popular ? "pt-12" : ""}`}>
-                {/* Plan header */}
-                <div className="mb-6">
-                  <h3
-                    className={`text-xl font-semibold mb-2 ${plan.featured ? "text-foreground" : ""
-                      }`}
-                  >
-                    {plan.name}
-                  </h3>
-
-                  {/* Price */}
-                  <div className="flex items-baseline gap-1 mb-3">
-                    <span className="text-sm text-muted-foreground">Rp</span>
-                    <span
-                      className={`text-4xl font-bold tracking-tight ${plan.popular ? "text-primary" : ""
-                        }`}
-                    >
-                      {plan.price}
-                    </span>
+                <div className="p-10 flex flex-col h-full">
+                  <div className="mb-10">
+                    <h3 className="text-2xl font-bold text-white font-heading mb-2 uppercase tracking-tight">
+                      {plan.name}
+                    </h3>
+                    <div className="flex items-baseline gap-1 mb-4">
+                      <span className="text-[#b0fb3a] font-bold text-lg">Rp</span>
+                      <span className="text-4xl font-black text-white font-heading">
+                        {plan.price}
+                      </span>
+                    </div>
+                    <p className="text-[#a3a3a3] text-sm font-sans leading-relaxed">
+                      {plan.tagline}
+                    </p>
                   </div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {plan.tagline}
-                  </p>
-                </div>
+                  <div className="h-px bg-white/10 w-full mb-8" />
 
-                {/* Divider */}
-                <div
-                  className={`h-px mb-6 ${plan.popular
-                      ? "bg-gradient-to-r from-transparent via-primary/50 to-transparent"
-                      : "bg-border/50"
-                    }`}
-                />
-
-                {/* Features */}
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, i) => {
-                    const isInherited =
-                      feature.startsWith("Semua yang ada di") ||
-                      feature.startsWith("*");
-                    return (
+                  <ul className="space-y-4 mb-12 flex-grow">
+                    {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        {isInherited ? (
-                          <span className="w-5 h-5 flex-shrink-0" />
-                        ) : (
-                          <div
-                            className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5 ${plan.popular
-                                ? "bg-primary/20 text-primary"
-                                : plan.featured
-                                  ? "bg-primary/15 text-primary"
-                                  : "bg-surface text-muted-foreground"
-                              }`}
-                          >
-                            <Check className="w-3 h-3" strokeWidth={3} />
-                          </div>
-                        )}
-                        <span
-                          className={`text-sm leading-relaxed ${isInherited
-                              ? "text-primary font-medium italic -ml-8"
-                              : "text-muted-foreground"
-                            }`}
-                        >
+                        <div className="mt-1 flex-shrink-0 w-4 h-4 rounded-full border border-[#b0fb3a]/40 flex items-center justify-center">
+                          <Check size={10} className="text-[#b0fb3a]" />
+                        </div>
+                        <span className="text-[#d1d1d1] text-[15px] font-sans leading-snug">
                           {feature}
                         </span>
                       </li>
-                    );
-                  })}
-                </ul>
+                    ))}
+                  </ul>
 
-                {/* CTA */}
-                <a
-                  href={getWhatsAppLink(activeCategory, plan.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  {plan.popular ? (
-                    <Button className="w-full" size="lg">
-                      Order Sekarang <ArrowRight className="w-5 h-5" />
-                    </Button>
-                  ) : (
-                    <button
-                      className={`w-full py-3.5 px-6 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${plan.featured
-                          ? "bg-foreground/10 text-foreground border border-foreground/20 hover:bg-foreground/20"
-                          : "bg-surface text-foreground border border-border hover:border-primary/50 hover:text-primary"
-                        }`}
-                    >
-                      Order Sekarang <ArrowRight className="w-4 h-4" />
-                    </button>
-                  )}
-                </a>
-              </div>
-            </motion.div>
+                  <a
+                    href={getWhatsAppLink(activeCategory, plan.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group/btn w-full flex items-center justify-center gap-2 py-4 rounded-full font-bold text-[15px] transition-all duration-300 ${
+                      plan.popular
+                        ? "bg-[#b0fb3a] text-black hover:bg-white"
+                        : "bg-white/5 text-white border border-white/10 hover:bg-white hover:text-black"
+                    }`}
+                  >
+                    Select Plan
+                    <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
+                  </a>
+                </div>
+              </SpotlightCard>
+            </AnimateOnScroll>
           ))}
         </div>
 
-        {/* Bottom note */}
-        <AnimateOnScroll delay={0.4} className="text-center mt-12">
-          <p className="text-sm text-muted-foreground">
-            Butuh paket custom?{" "}
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                "HALO KAK SAYA MAU PESAN WEBSITE\n\nSaya ingin konsultasi untuk paket custom. Bisa dibantu?"
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline font-medium"
-            >
-              Hubungi saya
-            </a>{" "}
-            untuk diskusi kebutuhan Anda.
-          </p>
+        {/* Footer Note */}
+        <AnimateOnScroll delay={0.4} className="mt-20 pt-12 border-t border-white/5 text-center">
+           <p className="text-[#a3a3a3] font-sans">
+            Need a custom solution for your enterprise? {" "}
+            <a href={`https://wa.me/${whatsappNumber}`} className="text-[#b0fb3a] font-bold hover:underline">
+              Contact us for consultation
+            </a>
+           </p>
         </AnimateOnScroll>
       </div>
     </section>

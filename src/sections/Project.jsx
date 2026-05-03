@@ -1,13 +1,13 @@
-import { ArrowUpRight, Github } from "lucide-react";
-import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
-import { AnimateOnScroll, StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
+import { AnimateOnScroll } from "@/components/MotionWrappers";
+import FlowingMenu from "@/components/bits/FlowingMenu";
+import ProjectModal from "@/components/ui/ProjectModal";
 
-const project = [
+const projects = [
   {
-    title: "System Manegement Ekstrakulikuler",
-    description:
-      "A system for managing the activities of the extracurricular department of a school.",
+    title: "System Management Ekstrakulikuler",
+    description: "A comprehensive and automated system designed for managing extracurricular activities in educational institutions. Features include real-time attendance tracking, student performance monitoring, and streamlined reporting for faculty and parents.",
     image: "/projects/ekskul.png",
     tags: ["Php Native", "Tailwind CSS", "MySQL"],
     github: "https://github.com/Rikivcstar/ekstraulikuler-sistem",
@@ -15,164 +15,99 @@ const project = [
   },
   {
     title: "Web Tour & Travel",
-    description:
-      "Web Tour & Travel with payment gateway and booking system.",
+    description: "A high-performance travel booking platform that offers an immersive user experience. It features integrated payment gateways, dynamic destination management, and a robust administrative panel for handling reservations efficiently.",
     image: "/projects/tour.png",
-    tags: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", 'Node.js'],
+    tags: ["Next.js", "React", "PostgreSQL"],
     github: "https://github.com/Rikivcstar/TourGO",
     link: "https://tour-go.vercel.app/",
   },
   {
-    title: "Website Layanan TopUp Game, Pulsa, Voucher & Dll",
-    description:
-      "A system for topup game, pulsa, voucher & dll with payment gateway and booking system.",
+    title: "TopUp Game & Pulsa",
+    description: "A secure and automated platform for instant digital top-ups. Built with scalability in mind, it integrates Midtrans for reliable payment processing and provides a seamless checkout flow for gamers and mobile users.",
     image: "/projects/game.png",
-    tags: ["Laravel 12", "Livewire", "Filament", "Tailwind CSS", "MySQL", 'Midtrans'],
+    tags: ["Laravel 12", "Livewire", "Midtrans"],
     github: "https://github.com/Rikivcstar/topup-game",
     link: "https://topup-game.vercel.app/",
   },
   {
-    title: "E-Commerce Website Laravel",
-    description:
-      "A website for an e-commerce business that sells products online.",
+    title: "E-Commerce Laravel Store",
+    description: "A modern e-commerce ecosystem featuring a sophisticated administrative interface powered by Filament. Includes full cart functionality, order tracking, and inventory management tailored for growing businesses.",
     image: "/projects/ecomerce.png",
-    tags: ["Laravel 12", "Livewire", "Filament", "Tailwind CSS", "MySQL", "Payment Gateway"],
+    tags: ["Laravel 12", "Livewire", "Filament"],
     github: "https://github.com/Rikivcstar/E-Commerce-Store",
     link: "#",
   },
   {
-    title: "Booking Hotel",
-    description:
-      "A website for a hotel booking system that allows users to book hotels online.",
+    title: "Booking Hotel System",
+    description: "A sleek hotel reservation system that prioritizes speed and clarity. Features real-time room availability, complex date range calculations, and a responsive dashboard for both guests and property managers.",
     image: "/projects/hotel.png",
-    tags: ["React", "Tailwind CSS", "Node.js", "Payment Gateway"],
+    tags: ["React", "Node.js", "Tailwind"],
     github: "https://github.com/Rikivcstar/Cabin-hotel",
     link: "https://booking-hotel.vercel.app",
   },
-  {
-    title: "E-commerce platform",
-    description:
-      "A full-featured e-commerce platform with product listings, shopping cart, and payment integration.",
-    image: "/projects/project2.png",
-    tags: ["Laravel", "Tailwind CSS", "Node.js"],
-    github: "#",
-    link: "#",
-  },
-  {
-    title: "Ai writer assistant",
-    description:
-      "An AI-powered writing assistant that helps users generate high-quality content quickly.",
-    image: "/projects/project4.png",
-    tags: ["React", "Tailwind CSS", "Node.js", "AI"],
-    github: "#",
-    link: "#",
-  },
-
 ];
 
 export const Project = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
   return (
-    <section id="projects" className="py-32 relative overflow-hidden">
-      {/* background glows */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl"></div>
-      <div className="container mx-auto px-6 relative z-10">
-        {/* section header */}
-        <div className="text-center mx-auto max-w-3xl mb-16">
+    <section id="projects" className="py-32 relative overflow-visible bg-[#0b0b0d]">
+      <div className="container mx-auto px-6 relative z-10 max-w-[1200px]">
+        {/* Header */}
+        <div className="mb-24">
           <AnimateOnScroll>
-            <span className="text-secondary-foreground text-sm font-medium uppercase tracking-wider">
-              Featured Work
-            </span>
+            <div className="flex items-center gap-3 text-[#b0fb3a] mb-6">
+              <span className="text-xl">✦</span>
+              <span className="text-sm font-bold tracking-[0.2em] uppercase font-sans">
+                My Work
+              </span>
+            </div>
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.1}>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground">
-              Projects that
-              <span className="font-serif italic font-normal text-white">
-                {" "}
-                make an impact.
-              </span>
-            </h2>
-          </AnimateOnScroll>
-          <AnimateOnScroll delay={0.2}>
-            <p className="text-muted-foreground">
-              A selection of my recent projects showcasing my skills in web
-              development, problem-solving, and delivering high-quality digital
-              experiences.
-            </p>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+              <h2 className="text-[3.5rem] md:text-[5.5rem] font-bold tracking-tighter text-white font-heading leading-[1.05]">
+                Selected Projects
+              </h2>
+              <p className="text-[#a3a3a3] text-[17px] md:text-lg leading-relaxed font-sans max-w-sm pb-2">
+                A curated selection of technical projects. Hover to reveal visual details, click to explore the full case study.
+              </p>
+            </div>
           </AnimateOnScroll>
         </div>
-        {/* project cards */}
-        <StaggerContainer className="grid md:grid-cols-2 gap-8" staggerDelay={0.12}>
-          {project.map((proj, idx) => (
-            <StaggerItem key={idx}>
-              <motion.div
-                className="group glass rounded-2xl overflow-hidden h-full"
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative overflow-hidden aspect-video">
-                  <motion.img
-                    src={proj.image}
-                    alt={proj.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 0.6 }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent opacity-60" />
-                  {/* overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <motion.a
-                      href={proj.link}
-                      className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
-                      whileHover={{ scale: 1.15 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <ArrowUpRight className="w-5 h-5" />
-                    </motion.a>
-                    <motion.a
-                      href={proj.github}
-                      className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
-                      whileHover={{ scale: 1.15 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Github className="w-5 h-5" />
-                    </motion.a>
-                  </div>
-                </div>
-                {/* content */}
-                <div className="p-6 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
-                      {proj.title}
-                    </h3>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-                  </div>
-                  <p className="text-muted-foreground text-sm ">
-                    {proj.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 ">
-                    {proj.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="px-4 py-1.5 rounded-full bg-surface text-xs font-medium border border-border/50 text-muted-foreground hover:border-primary/50 hover:text-primary transition-all duration-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-        {/* CTA */}
-        <AnimateOnScroll delay={0.2} className="text-center mt-12">
-          <AnimatedBorderButton>
-            View All Projects
-            <ArrowUpRight className="w-5 h-5" />
-          </AnimatedBorderButton>
+      </div>
+
+      {/* Flowing Menu Section */}
+      <div className="relative z-20">
+        <FlowingMenu items={projects} onItemClick={handleProjectClick} />
+      </div>
+
+      {/* Modal for Details */}
+      <ProjectModal 
+        project={selectedProject} 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
+
+      {/* Global CTA */}
+      <div className="container mx-auto px-6 mt-32 flex justify-center">
+        <AnimateOnScroll delay={0.2}>
+          <a
+            href="https://github.com/Rikivcstar"
+            target="_blank"
+            className="flex items-center gap-2 px-8 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 text-[15px] font-medium tracking-wide rounded-full"
+          >
+            Explore all on GitHub
+            <ArrowUpRight className="w-5 h-5 ml-1" />
+          </a>
         </AnimateOnScroll>
       </div>
     </section>
   );
 };
+

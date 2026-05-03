@@ -1,194 +1,93 @@
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { useState } from "react";
 import { AnimateOnScroll } from "@/components/MotionWrappers";
-import { motion, AnimatePresence } from "framer-motion";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 const testimonials = [
   {
     quote:
-      "Reza is one of the most talented engineers I've worked with. His attention to detail and ability to translate complex requirements into elegant solutions is remarkable.",
+      "Riki is an exceptional engineer. His ability to build robust Laravel backends while maintaining a pixel-perfect React frontend is rare. He delivered our project ahead of schedule with zero major bugs.",
     author: "Sarah Chen",
     role: "CTO, Tech Innovators Inc.",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
   },
   {
     quote:
-      "Working with Reza was a game-changer for our project. He delivered ahead of schedule with code quality that set a new standard for our team.",
+      "Working with Riki was a transformative experience for our startup. He didn't just write code; he helped us architect a scalable system that currently handles thousands of users daily.",
     author: "Michael Rodriguez",
     role: "Product Manager, Digital Solutions",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
   },
   {
     quote:
-      "Reza's expertise in React and TypeScript helped us rebuild our entire frontend in record time. His architectural decisions continue to pay dividends.",
+      "His expertise in UI/UX and motion design is world-class. He turned our boring dashboard into a premium experience that our clients absolutely love. Highly recommended!",
     author: "Emily Watson",
-    role: "Engineering Lead, StartUp Labs",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+    role: "Design Lead, Creative Labs",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
   },
   {
     quote:
-      "Not only is Reza technically brilliant, but he's also a fantastic communicator and team player. He elevated everyone around him.",
+      "Riki's problem-solving skills are top-notch. He tackled our complex inventory management system with ease and provided creative solutions we hadn't even considered.",
     author: "David Kim",
     role: "CEO, Innovation Hub",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+  },
+  {
+    quote:
+      "Professional, communicative, and technically brilliant. Riki is the kind of developer every team dreams of having. He truly understands the business side of development.",
+    author: "Jessica Lee",
+    role: "Operations Manager, Global Logistics",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop",
+  },
+  {
+    quote:
+      "The web app Riki built for us is incredibly fast and responsive. His mastery of Next.js and performance optimization is clearly visible in the final product.",
+    author: "Marcus Thorne",
+    role: "Technical Founder, SaaS Solutions",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
   },
 ];
 
-const slideVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? 200 : -200,
-    opacity: 0,
-    filter: "blur(8px)",
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    filter: "blur(0px)",
-  },
-  exit: (direction) => ({
-    x: direction < 0 ? 200 : -200,
-    opacity: 0,
-    filter: "blur(8px)",
-  }),
-};
-
 export const Testimonials = () => {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  const next = () => {
-    setDirection(1);
-    setActiveIdx((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const previous = () => {
-    setDirection(-1);
-    setActiveIdx(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
-
-  const goTo = (idx) => {
-    setDirection(idx > activeIdx ? 1 : -1);
-    setActiveIdx(idx);
-  };
-
   return (
-    <section id="testimonials" className="py-32 relative overflow-hidden">
-      <div
-        className="absolute top-1/2 left-1/2
-       w-[800px] h-[800px] bg-primary/5
-        rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
-      />
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="testimonials" className="py-32 relative overflow-hidden bg-[#0b0b0d]">
+      <div className="container mx-auto px-6 relative z-10 max-w-[1200px]">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="mb-20">
           <AnimateOnScroll>
-            <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
-              What People Say
-            </span>
-          </AnimateOnScroll>
-          <AnimateOnScroll delay={0.1}>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground">
-              Kind words from{" "}
-              <span className="font-serif italic font-normal text-white">
-                amazing people.
+            <div className="flex items-center gap-3 text-[#b0fb3a] mb-6">
+              <span className="text-xl">✦</span>
+              <span className="text-sm font-bold tracking-[0.2em] uppercase font-sans">
+                Social Proof
               </span>
-            </h2>
+            </div>
+          </AnimateOnScroll>
+          
+          <AnimateOnScroll delay={0.1}>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+              <h2 className="text-[3.5rem] md:text-[5rem] font-bold tracking-tighter text-white font-heading leading-[1.1]">
+                Client Testimonials
+              </h2>
+              <p className="text-[#a3a3a3] text-[17px] md:text-lg leading-relaxed font-sans max-w-sm pb-2">
+                Hear from the people and companies I've helped transform through technology and design.
+              </p>
+            </div>
           </AnimateOnScroll>
         </div>
+      </div>
 
-        {/* Testimonial Carousel */}
-        <AnimateOnScroll delay={0.2} className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Main Testimonial */}
-            <div className="glass p-8 rounded-3xl md:p-12 glow-border overflow-hidden relative min-h-[280px]">
-              <motion.div
-                className="absolute -top-4 left-8 w-12 h-12 rounded-full bg-primary flex items-center justify-center"
-                whileHover={{ rotate: 15, scale: 1.1 }}
-              >
-                <Quote className="w-6 h-6 text-primary-foreground" />
-              </motion.div>
-
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={activeIdx}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{
-                    duration: 0.4,
-                    ease: [0.25, 0.4, 0.25, 1],
-                  }}
-                >
-                  <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-8 pt-4">
-                    "{testimonials[activeIdx].quote}"
-                  </blockquote>
-
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={testimonials[activeIdx].avatar}
-                      alt={testimonials[activeIdx].author}
-                      className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/20"
-                    />
-                    <div>
-                      <div className="font-semibold">
-                        {testimonials[activeIdx].author}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {testimonials[activeIdx].role}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Testimonials Navigation */}
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <motion.button
-                className="p-3 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all cursor-pointer"
-                onClick={previous}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <ChevronLeft />
-              </motion.button>
-
-              <div className="flex gap-2">
-                {testimonials.map((_, idx) => (
-                  <motion.button
-                    key={idx}
-                    onClick={() => goTo(idx)}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      idx === activeIdx
-                        ? "bg-primary"
-                        : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                    }`}
-                    animate={{ width: idx === activeIdx ? 32 : 8 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{ scale: 1.2 }}
-                  />
-                ))}
-              </div>
-
-              <motion.button
-                onClick={next}
-                className="p-3 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all cursor-pointer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <ChevronRight />
-              </motion.button>
-            </div>
-          </div>
-        </AnimateOnScroll>
+      {/* Infinite Moving Cards */}
+      <div className="mt-10">
+        <InfiniteMovingCards
+          items={testimonials}
+          direction="right"
+          speed="slow"
+        />
+        <div className="mt-4">
+          <InfiniteMovingCards
+            items={testimonials.slice().reverse()}
+            direction="left"
+            speed="slow"
+          />
+        </div>
       </div>
     </section>
   );

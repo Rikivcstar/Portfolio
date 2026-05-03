@@ -1,28 +1,22 @@
 import { Button } from "@/components/Button";
 import {
   ArrowRight,
+  ArrowUpRight,
   Github,
   Instagram,
   Linkedin,
   Download,
+  Hand,
 } from "lucide-react";
 import { AnimatedBorderButton } from "@/components/AnimatedBorderButton";
 import { motion } from "framer-motion";
+import DecryptedText from "@/components/bits/DecryptedText";
 
 const skills = [
-  "React",
-  "Laravel",
-  "Node.js",
-  "JavaScript",
-  "Php",
-  "Livewire",
-  "TailwindCSS",
-  "MySQL",
-  "MongoDB",
-  "Docker",
-  "Git",
-  "Github",
-  "TypeScript",
+  "Software Engineer",
+  "Freelancer",
+  "Web Developer",
+  "Fullstack Developer",
 ];
 
 const fadeUp = (delay = 0) => ({
@@ -33,188 +27,119 @@ const fadeUp = (delay = 0) => ({
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* bg image */}
-      <div className="absolute inset-0">
-        <motion.img
-          src="/hero-bg.jpg"
-          alt="background"
-          className="w-full h-full object-cover opacity-40"
-          initial={{ scale: 1.15 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.8, ease: [0.25, 0.4, 0.25, 1] }}
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0b0b0d]">
+      {/* Grid Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div 
+          className="absolute inset-0 opacity-[0.15]" 
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(176, 251, 58, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(176, 251, 58, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background"></div>
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(circle at 50% 0%, transparent 0%, #0b0b0d 70%)'
+          }}
+        />
       </div>
 
-      {/* green dot */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1.5 h-1.5 rounded-full opacity-60 animate-pulse"
-            style={{
-              backgroundColor: "#20B2A6",
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `slow-drift ${
-                15 + Math.random() * 20
-              }s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          ></div>
-        ))}
-      </div>
       {/* content */}
       <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* left Colom -text content */}
-          <div className="space-y-8 ">
-            <motion.div {...fadeUp(0.1)}>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-sm text-primary">
-                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                Software Engineer • Laravel & React
-              </span>
-            </motion.div>
-            {/* headline */}
-            <div className="space-y-4">
-              <motion.h1
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-xl"
-                {...fadeUp(0.25)}
-              >
-                Crafting{" "}
-                <span className="text-primary glow-text ">digital</span>
-                <br />
-                experiences with
-                <br />
-                <span className="font-serif italic font-normal text-white">
-                  precision.
-                </span>
-              </motion.h1>
-              <motion.p
-                className="text-lg text-muted-foreground max-w-lg"
-                {...fadeUp(0.4)}
-              >
-                hi there! I'm Riki Reza Ryansyah, a passionate software engineer
-                specializing in Laravel and React. I love building efficient and
-                scalable web applications that deliver exceptional user
-                experiences.
-              </motion.p>
-            </div>
-            {/* CTA buttons */}
-            <motion.div className="flex flex-wrap gap-4" {...fadeUp(0.55)}>
-              <Button size="lg">
-                Contact Me <ArrowRight className="w-5 h-5" />
-              </Button>
-              <AnimatedBorderButton>
-                <Download className="w-5 h-5 " />
-                Download CV
-              </AnimatedBorderButton>
-            </motion.div>
+        <div className="flex flex-col w-full max-w-[1200px] mx-auto">
+          {/* Subtitle */}
+          <motion.div {...fadeUp(0.1)} className="mb-8 flex items-center gap-3 text-white/90">
+            <Hand className="text-[#b0fb3a] w-6 h-6 stroke-[2.5]" />
+            <span className="text-[17px] font-normal tracking-wide">Hey! It's me Riki,</span>
+          </motion.div>
 
-            {/* social links */}
-            <motion.div
-              className="flex items-center gap-4"
-              {...fadeUp(0.65)}
-            >
-              <span className="text-muted-foreground text-sm ">Follow :</span>
+          {/* Main Heading */}
+          <motion.h3
+            className="text-[2.5rem] leading-[1] sm:text-7xl md:text-[5.5rem] lg:text-[6.5rem] tracking-tighter text-white font-heading"
+            {...fadeUp(0.25)}
+          >
+            Crafting <span className="text-[#b0fb3a]">purpose</span><br className="hidden md:block" />
+            <span className="text-[#b0fb3a]">driven experiences</span><br />
+            that inspire &<br />
+            engage.
+          </motion.h3>
+
+          {/* Divider */}
+          <motion.div
+            className="w-full h-px bg-white/[0.08] mt-16 md:mt-32 mb-10"
+            {...fadeUp(0.4)}
+          />
+
+          {/* Bottom Area: Socials and Paragraph */}
+          <div className="flex flex-col-reverse md:flex-row justify-between items-start gap-12 w-full">
+
+            {/* Social Links */}
+            <motion.div className="flex flex-wrap gap-6 md:gap-8 pt-2" {...fadeUp(0.65)}>
               {[
-                { icon: Github, href: "https://github.com/Rikivcstar" },
-                {
-                  icon: Linkedin,
-                  href: "https://www.linkedin.com/in/rikirezariansyah",
-                },
-                {
-                  icon: Instagram,
-                  href: "https://www.instagram.com/_rikyreza/",
-                },
+                { name: "LINKEDIN", href: "https://www.linkedin.com/in/rikirezariansyah" },
+                { name: "GITHUB", href: "https://github.com/Rikivcstar" },
+                { name: "INSTAGRAM", href: "https://www.instagram.com/_rikyreza/" },
+                { name: "GMAIL", href: "mailto:rikirezariansyah@gmail.com" },
               ].map((social, idx) => (
-                <motion.a
+                <a
                   key={idx}
                   href={social.href}
                   target="_blank"
-                  className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="text-[13px] tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center gap-1 uppercase font-medium"
                 >
-                  <social.icon className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors" />
-                </motion.a>
+                  {social.name} <ArrowUpRight size={14} className="mb-0.5" />
+                </a>
               ))}
             </motion.div>
-          </div>
-          {/* right colom -image content */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 80, filter: "blur(10px)" }}
-            animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
-          >
-            {/* profile img */}
-            <div className="relative max-w-md mx-auto">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/30 via-transparent to-primary/10 blur-2xl animate-pulse " />
-              <div className="relative glass rounded-3xl p-2 glow-border ">
-                <img
-                  src="/profile.jpeg"
-                  alt="my profile"
-                  className="w-full aspect-[4/5] object-cover rounded-2xl"
-                />
 
-                {/* floating elements */}
-                <motion.div
-                  className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3"
-                  initial={{ opacity: 0, scale: 0.7 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.9, duration: 0.5, type: "spring" }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-medium">
-                      Available for work
-                    </span>
-                  </div>
-                </motion.div>
-                {/* state badge */}
-                <motion.div
-                  className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3"
-                  initial={{ opacity: 0, scale: 0.7 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.1, duration: 0.5, type: "spring" }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="text-2xl font-bold text-primary ">5+</div>
-                    <div className="text-xs text-muted-foreground">
-                      Years Exp.
-                    </div>
-                  </div>
-                </motion.div>
+            {/* Paragraph & Button */}
+            <motion.div className="max-w-[480px] flex flex-col gap-10" {...fadeUp(0.5)}>
+              <p className="text-[#a3a3a3] text-[17px] md:text-lg leading-relaxed font-sans">
+                I work with brands globally to build pixel-perfect, engaging, and accessible digital experiences that drive results and achieve business goals.
+              </p>
+
+              <div className="flex md:justify-end w-full">
+                <a href="#about" className="px-7 py-3.5 w-fit rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 text-[15px] font-medium tracking-wide">
+                  Know me better
+                </a>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+          </div>
         </div>
-        {/* skill */}
-        <motion.div
-          className="mt-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <p className="text-sm text-muted-foreground mb-6 text-center">
-            Technologies i work with
-          </p>
-          <div className="relative overflow-hidden">
-            <div className="flex animate-marquee">
-              {[...skills, ...skills].map((skill, idx) => (
-                <div key={idx} className="flex-shrink-0 px-8 py-6">
-                  <span className="text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors">
+        {/* Large Luxury Marquee */}
+        <div className="mt-32 border-y border-white/5 bg-white/[0.02] overflow-hidden py-10 relative left-1/2 right-1/2 -mx-[50vw] w-screen">
+          <motion.div
+            className="flex whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              ease: "linear",
+              duration: 30,
+              repeat: Infinity,
+            }}
+          >
+            <div className="flex gap-16 px-6">
+              {[...skills, ...skills, ...skills, ...skills].map((skill, idx) => (
+                <div key={idx} className="flex items-center gap-16">
+                  <span
+                    className="text-4xl md:text-6xl font-bold tracking-tight uppercase"
+                    style={{
+                      WebkitTextStroke: "1px rgba(255, 255, 255, 0.15)",
+                      color: "transparent",
+                    }}
+                  >
                     {skill}
                   </span>
+                  <span className="text-primary text-4xl md:text-6xl">✦</span>
                 </div>
               ))}
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

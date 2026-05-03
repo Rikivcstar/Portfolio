@@ -7,12 +7,17 @@ import { Contact } from "@/sections/Contact";
 import { Navbar } from "@/layouts/Navbar";
 import { Testimonials } from "@/sections/Testimonials";
 import { Footer } from "./layouts/Footer";
+import SplashCursor from "@/components/bits/SplashCursor";
 
 function App() {
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden relative">
+      <SplashCursor 
+        BACK_COLOR={{ r: 0.05, g: 0.08, b: 0.1 }} 
+        COLOR="#20b2a6" 
+      />
       <Navbar />
-      <main>
+      <main className="relative z-10 pointer-events-none *:pointer-events-auto">
         <Hero />
         <About />
         <Project />

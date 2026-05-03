@@ -1,109 +1,145 @@
-import { Code2, Lightbulb, Rocket, Users } from "lucide-react";
+import { useState } from "react";
+import { Code2, Lightbulb, Rocket, Users, ChevronDown } from "lucide-react";
 import { AnimateOnScroll, StaggerContainer, StaggerItem } from "@/components/MotionWrappers";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import ProfileCard from "@/components/bits/ProfileCard";
+import TextReveal from "@/components/bits/TextReveal";
+import GradientText from "@/components/bits/GradientText";
+import LogoLoop from "@/components/bits/LogoLoop";
 
-const highlights = [
-  {
-    icon: Code2,
-    title: "Clean Code",
-    description:
-      "I write clean and maintainable code, following best practices and coding standards to ensure scalability and ease of collaboration.",
-  },
-  {
-    icon: Rocket,
-    title: "Performance",
-    description:
-      "I optimize applications for speed and efficiency, ensuring fast load times and smooth user experiences across all devices.",
-  },
-  {
-    icon: Users,
-    title: "Colaboration",
-    description: "Working closely with teams to bring ideas to life.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Inovation",
-    description:
-      "I stay updated with the latest industry trends and technologies to bring innovative solutions to the table.",
-  },
+const skills = [
+  { name: "Laravel", icon: "https://cdn.simpleicons.org/laravel/FF2D20" },
+  { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
+  { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+  { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
+  { name: "Livewire", icon: "https://cdn.simpleicons.org/livewire/FB70A9" },
+  { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
+  { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb/47A048" },
+  { name: "Docker", icon: "https://cdn.simpleicons.org/docker/2496ED" },
+  { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/white" },
+  { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/339933" },
+  { name: "PHP", icon: "https://cdn.simpleicons.org/php/777BB4" },
+  { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/F7DF1E" },
 ];
+
+const specialityItems = [
+  {
+    title: "Web Development",
+    desc: "Building scalable and performant web applications using modern technologies like React, Next.js, and Laravel. I focus on writing clean, maintainable code and implementing robust backend architectures."
+  },
+  {
+    title: "Freelancer",
+    desc: "Creating intuitive and accessible interfaces that provide exceptional user experiences. I bridge the gap between design and development with pixel-perfect implementations."
+  },
+  {
+    title: "System Architecture",
+    desc: "Designing robust database schemas and API structures for complex systems. I ensure high availability and performance for enterprise-level applications."
+  }
+];
+
 export const About = () => {
+  const [openIndex, setOpenIndex] = useState(0);
+
   return (
-    <section id="about" className="py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* left column */}
-          <div className="space-y-8">
-            <AnimateOnScroll>
-              <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase ">
+    <section id="about" className="py-24 md:py-32 relative overflow-hidden bg-[#0b0b0d]">
+      <div className="container mx-auto px-6 relative z-10 max-w-[1200px]">
+        {/* Massive Intro (Full Width) */}
+        <div className="mb-10 md:mb-12">
+          <AnimateOnScroll>
+            <div className="flex items-center gap-3 text-[#b0fb3a] mb-4">
+              <span className="text-xl">✦</span>
+              <span className="text-sm font-bold tracking-[0.2em] uppercase font-sans">
                 About Me
               </span>
-            </AnimateOnScroll>
-            <AnimateOnScroll delay={0.1}>
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight text-secondary-foreground">
-                Building the future,{" "}
-                <span className="font-serif italic font-normal text-white">
-                  one line of code at a time.
+            </div>
+          </AnimateOnScroll>
+
+          <div className="w-full">
+            <TextReveal
+              text="I'm Riki Reza Ryansyah, a dedicated software engineer with a passion for crafting efficient and scalable web applications. With expertise in Laravel and React, I thrive on transforming complex problems into elegant solutions."
+              className="text-[1.8rem] sm:text-[2.5rem] md:text-[2.8rem] leading-[1.3] text-white font-medium tracking-tight"
+            />
+          </div>
+        </div>
+
+        {/* 2-Column Details Grid */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left: Speciality Accordion */}
+          <div className="lg:col-span-7 space-y-12">
+            <AnimateOnScroll>
+              <div className="flex items-center gap-3 text-[#b0fb3a] mb-6">
+                <span className="text-sm font-bold tracking-[0.2em] uppercase font-sans">
+                  Speciality
                 </span>
-              </h2>
-            </AnimateOnScroll>
-            <AnimateOnScroll delay={0.2}>
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  I'm Riki Reza Ryansyah, a dedicated software engineer with a
-                  passion for crafting efficient and scalable web applications.
-                  With expertise in Laravel and React, I thrive on transforming
-                  complex problems into
-                </p>
-                <p>
-                  elegant solutions that deliver exceptional user experiences. My
-                  commitment to clean code, performance optimization, and
-                  continuous learning drives me to stay at the forefront of
-                  industry trends and
-                </p>
-                <p>
-                  technologies. Let's build something amazing together and shape
-                  the future of web development with precision and innovation.
-                </p>
               </div>
+              <h3 className="text-4xl md:text-6xl font-bold tracking-tighter text-white font-heading leading-tight mb-10">
+                Areas of Expertise
+              </h3>
             </AnimateOnScroll>
-            <AnimateOnScroll delay={0.3}>
-              <div className="glass rounded-2xl p-6 glow-border">
-                <p className="text-lg font-medium italic text-foreground">
-                  "My mission is to create digital experiences that are not only
-                  functional but also delightful, ensuring every line of code
-                  contributes to a seamless and engaging user journey."
-                </p>
+
+            <div className="space-y-4">
+              {specialityItems.map((item, idx) => (
+                <AnimateOnScroll key={idx} delay={0.1 * idx}>
+                  <div
+                    className={`border-b border-white/10 pb-6 cursor-pointer transition-all duration-300 ${openIndex === idx ? "border-[#b0fb3a]/40" : "hover:border-white/20"}`}
+                    onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+                  >
+                    <div className="flex justify-between items-center py-4">
+                      <h4 className={`text-2xl md:text-3xl font-bold font-heading transition-colors duration-300 ${openIndex === idx ? "text-[#b0fb3a]" : "text-white"}`}>
+                        {item.title}
+                      </h4>
+                      <motion.div
+                        animate={{ rotate: openIndex === idx ? 180 : 0 }}
+                        className={`transition-colors duration-300 ${openIndex === idx ? "text-[#b0fb3a]" : "text-white/30"}`}
+                      >
+                        <ChevronDown size={28} />
+                      </motion.div>
+                    </div>
+
+                    <AnimatePresence>
+                      {openIndex === idx && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-[#a3a3a3] font-sans leading-relaxed text-[17px] pb-4 max-w-2xl">
+                            {item.desc}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </AnimateOnScroll>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Interactive Profile Card */}
+          <div className="lg:col-span-5 w-full flex justify-center lg:justify-start lg:pt-10">
+            <AnimateOnScroll delay={0.3} className="w-full">
+              <div className="relative group w-full max-w-[580px]">
+                <div className="absolute -inset-12 bg-[#b0fb3a]/10 rounded-[4rem] blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <ProfileCard
+                  image="/profile.jpeg"
+                  name="Riki Reza"
+                  role="Software Engineer"
+                />
               </div>
             </AnimateOnScroll>
           </div>
-          {/* right column */}
-          <StaggerContainer className="grid sm:grid-cols-2 gap-6" staggerDelay={0.15}>
-            {highlights.map((highlight, idx) => (
-              <StaggerItem key={idx}>
-                <motion.div
-                  className="glass rounded-2xl p-6 flex flex-col items-start gap-4 h-full"
-                  whileHover={{
-                    y: -8,
-                    scale: 1.02,
-                    transition: { duration: 0.3 },
-                  }}
-                >
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <highlight.icon className="w-6 h-6" />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {highlight.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {highlight.description}
-                    </p>
-                  </div>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+        </div>
+
+        {/* Skills Logo Loop Row */}
+        <div className="mt-24 pt-12 border-t border-white/5">
+          <div className="relative">
+            <LogoLoop items={skills} speed="normal" direction="left" />
+            <div className="mt-4">
+              <LogoLoop items={skills.slice().reverse()} speed="normal" direction="right" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
