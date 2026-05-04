@@ -15,7 +15,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] cursor-zoom-out"
+            className="fixed inset-0 bg-black/90 backdrop-blur-xl z-[9998] cursor-zoom-out"
           />
 
           {/* Modal Content */}
@@ -24,12 +24,12 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-4 md:inset-10 lg:inset-20 bg-[#0b0b0d] border border-white/10 rounded-[2.5rem] z-[101] overflow-hidden flex flex-col lg:flex-row shadow-2xl"
+            className="fixed inset-0 md:inset-10 lg:inset-20 bg-[#0b0b0d] md:border md:border-white/10 md:rounded-[2.5rem] z-[9999] overflow-y-auto flex flex-col lg:flex-row shadow-2xl"
           >
             {/* Close Button */}
             <button 
               onClick={onClose}
-              className="absolute top-6 right-6 p-3 bg-white/5 hover:bg-white/10 rounded-full text-white transition-colors z-[110]"
+              className="fixed top-4 right-4 md:absolute md:top-6 md:right-6 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white transition-colors z-[10000]"
             >
               <X size={24} />
             </button>

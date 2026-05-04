@@ -11,6 +11,7 @@ import {
 import { AnimatedBorderButton } from "@/components/AnimatedBorderButton";
 import { motion } from "framer-motion";
 import DecryptedText from "@/components/bits/DecryptedText";
+import Squares from "@/components/bits/Squares";
 
 const skills = [
   "Software Engineer",
@@ -28,22 +29,19 @@ const fadeUp = (delay = 0) => ({
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0b0b0d]">
-      {/* Grid Background */}
+      {/* ReactBits Squares Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div 
-          className="absolute inset-0 opacity-[0.15]" 
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(176, 251, 58, 0.1) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(176, 251, 58, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
+        <Squares 
+          direction="diagonal"
+          speed={0.5}
+          squareSize={45}
+          borderColor="rgba(176, 251, 58, 0.15)"
+          hoverFillColor="rgba(176, 251, 58, 0.1)"
         />
         <div 
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(circle at 50% 0%, transparent 0%, #0b0b0d 70%)'
+            background: 'radial-gradient(circle at 50% 0%, transparent 0%, #0b0b0d 85%)'
           }}
         />
       </div>
